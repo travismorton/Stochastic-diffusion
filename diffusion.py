@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import numpy
 import math
 import matplotlib.mlab as mlab
