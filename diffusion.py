@@ -5,8 +5,8 @@ import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 
-walkers = 100000
-time = 10
+walkers = 1000000
+time = 6.0
 timeStep = .01
 steps = int(round(time / timeStep))
 particles = numpy.random.normal(-3, 1, walkers)
@@ -18,7 +18,13 @@ mu, sigma = norm.fit(particles)
 print("mu = " + str(mu) + "\nsigma = " + str(sigma))
 
 p1 = numpy.arange(min(particles), max(particles), 0.01)
-plt.plot(p1, mlab.normpdf(p1, mu, sigma), 'r-', linewidth=3)
-plt.hist(og, 100, normed=1, facecolor='cyan', alpha=.6)
-plt.hist(particles, 100, normed=1, facecolor='purple', alpha=.6)
+plt.hist(og, 60, normed=1, facecolor='cyan', alpha=.6, label="Initial Distribution")
+plt.hist(particles, 60, normed=1, facecolor='y', alpha=.6, label="Final Distribution")
+plt.plot(p1, mlab.normpdf(p1, mu, sigma), 'purple', linewidth=2, label="Fit of Final")
+plt.legend(loc=2)
+plt.title("Stochastic Diffusion With Non-Constant Drift Velocity")
+plt.xlabel("x")
+plt.ylabel("Probability")
+plt.figtext(0.75, 0.5, "$\mu = " + str(round(mu, 3)) + "$\n$\sigma = " + str(round(sigma, 3)) + "$", fontsize=12)
+
 plt.show()
